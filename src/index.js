@@ -59,6 +59,16 @@ function renderPokemons(input = ""){
   getPokemonContainer().innerHTML = "";
   if (searchPokemon(input).length === 0){
     noMatching()
+  }else if (searchPokemon(input).length === 1){
+    let targetP = searchPokemon(input)[0];
+    createPokemonCard(targetP);
+    const newDiv = getPokemonContainer().appendChild(document.createElement('div'));
+    const ul = newDiv.appendChild(document.createElement('ul'));
+    const detail = ["height", "weight", "types"]
+    detail.forEach((el) => {
+      const li = ul.appendChild(document.createElement('li'));
+      li.innerText = `${el}: ${targetP[el]}`;
+    })
   }else{
     searchPokemon(input).forEach((el) => createPokemonCard(el));
   }
